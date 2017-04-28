@@ -1,5 +1,5 @@
 'use strict';
-var http = require('http');
+var https = require('https');
 var fs = require('fs');
 var required = ["imageUrl", "imagePath"];
 
@@ -10,7 +10,7 @@ module.exports = function(options){
       return;
     }
   });
-  http.get(options.imageUrl, function(res){
+  https.get(options.imageUrl, function(res){
       var img = "";
       res.setEncoding("binary");
       res.on("data", function(chunk){
