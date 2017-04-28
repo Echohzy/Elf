@@ -1,7 +1,7 @@
 'use strict';
 var http = require('http');
 var fs = require('fs');
-var requiredAttr = ["imageUrl", "imagePath"];
+var required = ["imageUrl", "imagePath"];
 
 module.exports = function(options){
   options&&required.forEach(function(item){
