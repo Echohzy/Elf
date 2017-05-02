@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Echohzy/Elf/issues"
   },
-  "homepage": "https://github.com/Echohzy/Elf#readme"
+  "homepage": "https://github.com/Echohzy/Elf#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
 }

@@ -1,28 +1,31 @@
 'use strict';
 var https = require('https');
 var fs = require('fs');
+var request = require('request');
 var required = ["imageUrl", "imagePath"];
+var message="";
 
 module.exports = function(options){
-  options&&required.forEach(function(item){
-    if(!options[item]){
-      throw "can\'t find " + item;
-      return;
+  
+  if(!options){
+    console.log("can\' find imageUrl and imagePath");
+    return;
+  }
+  if(!options.imageUrl){
+    console.log("can\' find imageUrl");
+    return;
+  }
+  if(!options.imagePath){
+    console.log("can\' find imagePath");
+    return;
+  }
+  request(options.imageUrl)
+  .on('response', function(response) {
+    if(response.statusCode===200){
+      response.pipe(fs.createWriteStream(options.imagePath));
+    }else{
+      console.log(options.imageUrl + " " +response.statusMessage);
     }
-  });
-  https.get(options.imageUrl, function(res){
-      var img = "";
-      res.setEncoding("binary");
-      res.on("data", function(chunk){
-          img+=chunk;
-      });
-      res.on("end", function(){
-          fs.writeFile(options.imagePath, img, "binary", function(err){
-              if(err){
-                  console.log(err);
-              }
-          });
-      });
   });
 }
 
